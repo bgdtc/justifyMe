@@ -1,0 +1,43 @@
+name: Deploy
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+    types:
+      - closed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: 'install'
+        run: make install
+
+      - name: 'build'
+        run: make build
+
+      - name: 'configure-aws'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy back-end to AWS lambda
+        uses: serverless/github-action@v3.1
+        with:
+          args: -c "serverless deploy"
+          entrypoint: /bin/sh
+        env:
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
