@@ -1,0 +1,16 @@
+service: justify-me
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: src/index.handler
+    events:
+      - httpApi: '*'
+
+plugins:
+  - 'serverless-plugin-typescript-express'
+  - 'serverless-offline'

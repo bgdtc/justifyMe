@@ -1,0 +1,45 @@
+
+# CUSTOM WORKFLOW 
+# check dependencies - check dependencies install - check unit tests - check build -> incoming check deploy
+
+name: 'Dependency Review'
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  Dependency-Review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v3
+      # - name: 'Dependency Review'
+      #   uses: actions/dependency-review-action@v3
+        
+  Install-And-Test:
+   runs-on: ubuntu-latest
+   steps: 
+     - name: 'checkout'
+       uses: actions/checkout@v3
+       
+     - name: 'install'
+       run: make install
+       
+     - name: 'make test'
+       run: make test
+
+  Build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: 'checkout'
+        uses: actions/checkout@v3
+        
+      - name: 'install'
+        run: make install
+       
+      - name: 'build'
+        run: make build
+ 
