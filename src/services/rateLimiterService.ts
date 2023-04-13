@@ -4,9 +4,9 @@ import { verifyJwt } from './cryptoService';
 
 const dynamoDbClient = new DynamoDBClient({});
 const dynamoDb = DynamoDBDocumentClient.from(dynamoDbClient);
-const tableName = process.env.DYNAMODB_TABLE_NAME!;
+const tableName = process.env.DYNAMODB_TABLE_NAME! || 'TokensRateLimit' ;
 
-const rateLimit = Number(process.env.JUSTIFY_WORD_LIMIT!);
+const rateLimit = Number(process.env.JUSTIFY_WORD_LIMIT! || 80000);
 const now = new Date();
 const hPlus24 = now.setHours(now.getHours() + 24);
 
@@ -23,7 +23,7 @@ export const checkTokenRateLimit = async (token:string, wordCount:number): Promi
         if (currentWordCount + wordCount > rateLimit) return false;
         
         if (!data?.Item) {
-           throw new Error('Illegal token');
+            throw new Error('Illegal token');
         } else {
             const updateParams = {
                 TableName: tableName,
@@ -36,14 +36,13 @@ export const checkTokenRateLimit = async (token:string, wordCount:number): Promi
         }
         return true;
     } catch (e) {
-        console.error(e);
-        throw new Error("Error updating rate limit"+e);
+        return false;
     }
 }
 
-export const insertTokenIntoDb = async (token:string): Promise<boolean> => {
+export const insertTokenIntoDb = async (token:string,secret?:string): Promise<boolean> => {
     try {
-        const decodedToken:any = await verifyJwt(token);
+        const decodedToken:any = await verifyJwt(token,secret);
         const lookForEmailParams = {
             TableName:tableName,
             IndexName: 'email',
@@ -70,6 +69,6 @@ export const insertTokenIntoDb = async (token:string): Promise<boolean> => {
         await dynamoDb.send(new PutCommand(newItem));
         return true;
     } catch (e) {
-        throw new Error('Error inserting token into db'+e)
+        return false;
     }
 }
