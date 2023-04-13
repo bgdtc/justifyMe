@@ -2,6 +2,7 @@
 .DEFAULT_GOAL := install
 
 TERRAFORM_DIR=./terraform
+AWS_PROFILE=default
 
 install:
 	@yarn
@@ -25,10 +26,10 @@ refresh:
 	make install deploy
 
 tf-init:
-	cd ./terraform && terraform init
+	AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$(AWS_PROFILE) cd ./terraform && terraform init
 
 tf-plan:
-	cd ./terraform && terraform plan
+	AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$(AWS_PROFILE) cd ./terraform && terraform plan
 
 tf-apply:
-	cd ./terraform && terraform apply
+	AWS_SDK_LOAD_CONFIG=1 AWS_PROFILE=$(AWS_PROFILE) cd ./terraform && terraform apply

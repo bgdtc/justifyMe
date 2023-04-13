@@ -3,9 +3,12 @@ import { justifyText } from "../services";
 import { checkTokenRateLimit } from "../services";
 
 export const justify = async (req: Request, res: Response) => {
-  // TODO: req.body.text ou req.query.text 
-  console.log(req?.body, req?.query);
+
   if (!req?.headers?.authorization) return res.status(401).send('unauthorized');
+  if (!req?.body?.text && !req?.query?.text) res.status(401).send('no text provided');
+  if (req?.body?.text === '' && req?.query?.text === '') res.status(401).send('empty text provided');
+
+  const text:string = req?.body?.text || req?.query?.text || '';
 
   let token: string;
 
@@ -16,7 +19,7 @@ export const justify = async (req: Request, res: Response) => {
     return res.status(401).send(e);
   }
   
-  const wordCount = (req?.body?.text?.match(/\S+/g) || []).length;
+  const wordCount = (text?.match(/\S+/g) || []).length;
 
   if (!(await checkTokenRateLimit(token,wordCount))) return res.status(402).send('Payment Required');
 

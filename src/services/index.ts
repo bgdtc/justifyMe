@@ -1,3 +1,3 @@
 export * from './cryptoService';
-export * from './textFormatService';
+export * from './justifyTextService';
 export * from './rateLimiterService';

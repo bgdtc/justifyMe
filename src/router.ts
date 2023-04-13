@@ -1,5 +1,6 @@
 import { justify, getToken } from "./controllers";
 import rateLimit from "express-rate-limit";
+import { mailRgx } from "./utils";
 import express from "express";
 
 const router = express.Router();
@@ -9,6 +10,7 @@ const rateLimiter = rateLimit({
   max: Number(process.env.TOKENS_MAX_REQUEST!),
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => !mailRgx.test(req?.body?.email) ? true : false
 });
 
 router.route("/tokens").post(rateLimiter, getToken);
