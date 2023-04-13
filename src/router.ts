@@ -1,13 +1,19 @@
-import express from 'express';
+import { justify, getToken } from "./controllers";
+import rateLimit from "express-rate-limit";
+import { mailRgx } from "./utils";
+import express from "express";
 
 const router = express.Router();
 
-router.route('/').get((req:any,res:any) => {
-    res.status(200).send({ok:'ok'});
-})
+const rateLimiter = rateLimit({
+  windowMs: Number(process.env.TOKENS_RATE_LIMIT_TIMEOUT!),
+  max: Number(process.env.TOKENS_MAX_REQUEST!),
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) => !mailRgx.test(req?.body?.email) ? true : false
+});
 
-router.route('/tokens').post();
-
-router.route('/justify').post();
+router.route("/tokens").post(rateLimiter, getToken);
+router.route("/justify").post(justify);
 
 export default router;

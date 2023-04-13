@@ -1,0 +1,301 @@
+_type: export
+__export_format: 4
+__export_date: 2023-04-14T15:14:02.289Z
+__export_source: insomnia.desktop.app:v2023.1.0
+resources:
+  - _id: req_wrk_cb4a225a1f0a41c4bbd6b518acc29a20356a192b
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681484889518
+    created: 1681376379645
+    url: "{{ base_url }}/tokens"
+    name: Crée un jeton d'accès à l'API.(LOCAL)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "email": "invalide@valide.com"
+        }
+    parameters: []
+    headers:
+      - name: X-Forwarded-For
+        disabled: true
+        value: string
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1681376379645
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    parentId: null
+    modified: 1681375967777
+    created: 1681375967777
+    name: my-spec.yaml
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_fbba43dbcc7a410c8cbbab4e08608ac9
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681485004002
+    created: 1681484914903
+    url: "{{ _.prod_host }}/tokens"
+    name: Crée un jeton d'accès à l'API.(PROD)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "email": "invalide@valide.com"
+        }
+    parameters: []
+    headers:
+      - name: X-Forwarded-For
+        disabled: true
+        value: string
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1681376379643
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_wrk_cb4a225a1f0a41c4bbd6b518acc29a20da4b9237
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681484895349
+    created: 1681376379641
+    url: '{{ base_url }}/justify?text="test"'
+    name: Justifie un texte en alignant les mots sur une largeur donnée.(LOCAL)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lorem id orci congue gravida eget ut nunc."
+        }
+    parameters: []
+    headers:
+      - name: Authorization
+        disabled: false
+        value: Bearer
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidmFsaWRAZW1haWwuZnIiLCJpYXQiOjE2ODE0MjA3NDUsImV4cCI6MTY4MTUwNzE0NX0.isN0jpv0sj0v2TpaXG6t8Y1fT8wBDWYU5l53P-uzPnc
+        id: pair_4057df638a94475595d4e87cbff69a1e
+      - name: Content-Type
+        value: application/json
+        id: pair_e7e5fef7a18f4a5f8185ceac00810018
+    authentication: {}
+    metaSortKey: -1681376379641
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e44e0a4cde694cd4bb2d090df07f5ccb
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681484907985
+    created: 1681484907985
+    url: '{{ base_url }}/justify?text="test"'
+    name: Justifie un texte en alignant les mots sur une largeur donnée.(PROD)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lorem id orci congue gravida eget ut nunc."
+        }
+    parameters: []
+    headers:
+      - name: Authorization
+        disabled: false
+        value: Bearer
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidmFsaWRAZW1haWwuZnIiLCJpYXQiOjE2ODE0MjA3NDUsImV4cCI6MTY4MTUwNzE0NX0.isN0jpv0sj0v2TpaXG6t8Y1fT8wBDWYU5l53P-uzPnc
+        id: pair_4057df638a94475595d4e87cbff69a1e
+      - name: Content-Type
+        value: application/json
+        id: pair_e7e5fef7a18f4a5f8185ceac00810018
+    authentication: {}
+    metaSortKey: -1680816921111.5
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_5a8b99d8059329c8c814d58f16967f8a3908bd5f
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681375967799
+    created: 1681375967799
+    name: Base Environment
+    data:
+      base_url: "{{ scheme }}://{{ host }}{{ base_path }}"
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1681375967799
+    _type: environment
+  - _id: jar_5a8b99d8059329c8c814d58f16967f8a3908bd5f
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681375967802
+    created: 1681375967802
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_c29687215dc34f2fb6972aceedbc63a7
+    parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
+    modified: 1681376379655
+    created: 1681375998398
+    fileName: my-spec.yaml
+    contents: >
+      openapi: 3.0.0
+
+      info:
+        title: API de justification de texte
+        contact: {
+          
+        }
+        version: 1.0.0
+        description: API permettant de justifier un texte en alignant les mots sur une largeur donnée.
+      servers:
+        - url: http://localhost:3000/api
+      paths:
+        /tokens:
+          post:
+            description: creé un token
+            summary: Crée un jeton d'accès à l'API.
+            operationId: '1'
+            tags:
+              - dogs
+            parameters:
+              - in: header
+                name: X-Forwarded-For
+                required: false
+                schema:
+                  type: string
+                description: L'adresse IP du client qui effectue la requête.
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        description: L'adresse email de l'utilisateur.
+                    required:
+                      - email
+            responses:
+              '200':
+                description: Token généré avec succès.
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        token:
+                          type: string
+              '429':
+                description: Trop de requêtes ont été effectuées récemment.
+          x-rate-limits:
+            - rateLimit:
+                windowMs: 86400000 # 1 jour en millisecondes
+                max: 1
+                keyGenerator: 'function(req) { return req.headers["x-forwarded-for"] || req.connection.remoteAddress; }'
+        /justify:
+          post:
+            summary: Justifie un texte en alignant les mots sur une largeur donnée.
+            description: asclépios
+            operationId: '2'
+            tags:
+              - pets
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        description: Le texte à justifier.
+                    required:
+                      - text
+            parameters:
+              - in: header
+                name: Authorization
+                required: true
+                schema:
+                  type: string
+                description: Le jeton d'accès à l'API.
+            responses:
+              '200':
+                description: Texte justifié avec succès.
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        justifiedText:
+                          type: string
+              '400':
+                description: La requête est mal formée.
+              '429':
+                description: Trop de requêtes ont été effectuées récemment.
+          x-rate-limits:
+            - rateLimit:
+                windowMs: 86400000 # 1 jour en millisecondes
+                max: 80000
+                keyGenerator: 'function(req) { return req.headers["authorization"]; }'
+    contentType: yaml
+    _type: api_spec
+  - _id: env_env_5a8b99d8059329c8c814d58f16967f8a3908bd5f_sub__64324caa
+    parentId: env_5a8b99d8059329c8c814d58f16967f8a3908bd5f
+    modified: 1681485018270
+    created: 1681376379648
+    name: OpenAPI env localhost:3000
+    data:
+      scheme: http
+      base_path: /api
+      host: localhost:3000
+      prod_host: justifyme.dev.sartheemploi.fr/api
+    dataPropertyOrder:
+      "&":
+        - scheme
+        - base_path
+        - host
+        - prod_host
+    color: null
+    isPrivate: false
+    metaSortKey: 1681376379648
+    _type: environment
+  - _id: env_18dba78075bd4108a13082bcedd6c697
+    parentId: env_5a8b99d8059329c8c814d58f16967f8a3908bd5f
+    modified: 1681484951621
+    created: 1681484951621
+    name: New Environment
+    data: {}
+    dataPropertyOrder: null
+    color: null
+    isPrivate: false
+    metaSortKey: 1681484951621
+    _type: environment
