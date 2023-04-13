@@ -1,13 +1,17 @@
-import express from 'express';
+import { justify, getToken } from "./controllers";
+import rateLimit from "express-rate-limit";
+import express from "express";
 
 const router = express.Router();
 
-router.route('/').get((req:any,res:any) => {
-    res.status(200).send({ok:'ok'});
-})
+const rateLimiter = rateLimit({
+  windowMs: Number(process.env.TOKENS_RATE_LIMIT_TIMEOUT!),
+  max: Number(process.env.TOKENS_MAX_REQUEST!),
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
-router.route('/tokens').post();
-
-router.route('/justify').post();
+router.route("/tokens").post(rateLimiter, getToken);
+router.route("/justify").post(justify);
 
 export default router;

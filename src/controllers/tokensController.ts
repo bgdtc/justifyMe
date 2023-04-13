@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
+import { createToken } from '../services';
 
-export const getToken = (req:Request,res:Response) => {
-    console.log(req?.body);
-}
+export const getToken = async (req:Request,res:Response) => {
+    return res.status(200).send(await createToken(req?.body?.email));
+};
