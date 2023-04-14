@@ -1,9 +1,11 @@
 # Justify Me API
 
 Ce projet est une API REST serverless fonctionnant avec AWS lambda et dynamoDB permettant de justifier du texte.
+L'api est disponible à cette addresse : https://justifyme.dev.sartheemploi.fr/api
+La documentation de cette API est disponible à cette addresse : https://bgdtc.github.io/justify-me-api-docs/
 
 ## Prérequis
-
+0. nodejs,npm,yarn,make...
 1. un compte AWS.
 2. un compte terraform cloud avec un workspace.
 3. un compte serverless.
@@ -23,7 +25,8 @@ Un fichier **insomnia.yml** est disponible dans le repo, il contient un workspac
 
 ## Déploiement
 
-1. `make refresh` (déploiement de la lambda sur AWS via serverless)
+1. `make tf-init && make tf-plan && make tf-apply` (création de la table dans dynamo avec les autorisations nécessaires, etc.)
+2. `make refresh` (déploiement de la lambda sur AWS via serverless)
 
 ## Routes
 
