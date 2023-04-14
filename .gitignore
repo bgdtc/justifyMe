@@ -1,3 +1,9 @@
+# build
+.build/
+
+# DS_STORE 
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -31,7 +37,7 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# node-waf configuration
+# node-waf configuration //
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
@@ -40,6 +46,10 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+
+# Terraform
+terraform/.terraform/**
+.terraform.lock.hcl
 
 # TypeScript v1 declaration files
 typings/
@@ -92,6 +102,7 @@ dist
 .vuepress/dist
 
 # Serverless directories
+serverless.yml
 .serverless/
 
 # FuseBox cache

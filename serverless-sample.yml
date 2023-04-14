@@ -1,0 +1,27 @@
+service: justify-me
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  iam:
+    role: arn:aws:iam::<your-aws-account-id>:role/lambda_role # role created by terraform, see terraform/db.tf
+
+functions:
+  handler:
+    handler: src/handler.handler
+    environment:
+      TOKENS_RATE_LIMIT_TIMEOUT: 86400000 # 24 hours
+      TOKENS_MAX_REQUEST: 1 # max requests by TOKENS_RATE_LIMIT_TIMEOUT
+      JUSTIFY_WORD_LIMIT: 80000 # max words justified / TOKEN_RATE_LIMIT_TIMEOUT
+      JWT_SECRET: "your_jwt_secret" # secret for the jwt
+      DYNAMODB_TABLE_NAME: "TokensRateLimit" # your dynamodb table name, default config is TokensRateLimit
+    events:
+      - httpApi:
+          path: "/{proxy+}"
+          method: "*"
+
+plugins:
+  - "serverless-plugin-typescript"
+  - "serverless-offline"
+

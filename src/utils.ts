@@ -1,0 +1,1 @@
+export const mailRgx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

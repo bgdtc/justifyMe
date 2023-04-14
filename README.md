@@ -1,106 +1,44 @@
-<!--
-title: 'Serverless Framework Node Express API on AWS'
-description: 'This template demonstrates how to develop and deploy a simple Node Express API running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Justify Me API
 
-# Serverless Framework Node Express API on AWS
+Ce projet est une API REST serverless fonctionnant avec AWS lambda et dynamoDB permettant de justifier du texte.
+L'api est disponible à cette addresse : https://justifyme.dev.sartheemploi.fr/api
+La documentation de cette API est disponible à cette addresse : https://bgdtc.github.io/justify-me-api-docs/
 
-This template demonstrates how to develop and deploy a simple Node Express API service running on AWS Lambda using the traditional Serverless Framework.
+## Prérequis
+0. nodejs,npm,yarn,make...
+1. un compte AWS.
+2. un compte terraform cloud avec un workspace.
+3. un compte serverless.
 
-## Anatomy of the template
+## Installation
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http).
+1. `git clone https://github.com/bgdtc/justifyMe.git`
+2. `cd justify me && make`
+3. Renommez "serverless-sample.yml" en "serverless.yml" et configurez le fichier avec vos informations.
+4. Dans le dossier terraform/, modifiez les fichiers "db.tf", "env-config.tf" et "main.tf" avec vos informations.
+5. `make tf-init && make tf-plan && make tf-apply` (création de la table dans dynamo avec les autorisations nécessaires, etc.)
+6. `make start` (démarre le projet localement avec serverless offline)
 
-## Usage
+## Utilisation
 
-### Deployment
+Un fichier **insomnia.yml** est disponible dans le repo, il contient un workspace insomnia préconfiguré avec des exemples de requêtes. Cependant, une documentation openapi est disponible à cette adresse : https://bgdtc.github.io/justify-me-api-docs/
 
-Install dependencies with:
+## Déploiement
 
-```
-npm install
-```
+1. `make tf-init && make tf-plan && make tf-apply` (création de la table dans dynamo avec les autorisations nécessaires, etc.)
+2. `make refresh` (déploiement de la lambda sur AWS via serverless)
 
-and then deploy with:
+## Routes
 
-```
-serverless deploy
-```
+- **POST** `/api/tokens` : génère un token JWT pour un utilisateur avec une adresse e-mail valide.
+- **POST** `/api/justify` : justifie le texte en entrée en respectant une largeur de ligne spécifique.
 
-After running deploy, you should see output similar to:
+## Configuration
 
-```bash
-Deploying aws-node-express-api-project to stage dev (us-east-1)
+Les variables d'environnement suivantes sont utilisées pour configurer l'application :
 
-✔ Service deployed to stack aws-node-express-api-project-dev (196s)
-
-endpoint: ANY - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com
-functions:
-  api: aws-node-express-api-project-dev-api (766 kB)
-```
-
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [`httpApi` event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).
-
-### Invocation
-
-After successful deployment, you can call the created application via HTTP:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
-
-Which should result in the following response:
-
-```
-{"message":"Hello from root!"}
-```
-
-Calling the `/hello` path with:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/hello
-```
-
-Should result in the following response:
-
-```bash
-{"message":"Hello from path!"}
-```
-
-If you try to invoke a path or method that does not have a configured handler, e.g. with:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/nonexistent
-```
-
-You should receive the following response:
-
-```bash
-{"error":"Not Found"}
-```
-
-### Local development
-
-It is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
-
-```bash
-serverless plugin install -n serverless-offline
-```
-
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
-
-After installation, you can start local emulation with:
-
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
+- **TOKENS_RATE_LIMIT_TIMEOUT** : durée en ms pendant laquelle le quota de mots est appliqué (par défaut : 86400000 ms, soit 24 heures).
+- **TOKENS_MAX_REQUEST** : nombre maximal de requêtes autorisées pour une période de TOKENS_RATE_LIMIT_TIMEOUT (par défaut : 1).
+- **JUSTIFY_WORD_LIMIT** : nombre maximal de mots pouvant être justifiés pendant une période de TOKENS_RATE_LIMIT_TIMEOUT (par défaut : 80000 mots).
+- **JWT_SECRET** : clé secrète utilisée pour signer les tokens JWT (remplacez "your_jwt_secret" par votre propre clé secrète).
+- **DYNAMODB_TABLE_NAME** : nom de la table DynamoDB utilisée pour stocker les informations de quota (par défaut : "TokensRateLimit")
