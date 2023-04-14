@@ -1,12 +1,11 @@
-# TODO: keys in makefile profile
 provider "aws" {
-  region  = "us-east-1"
-  access_key = var.access_key
-  secret_key = var.secret_key 
+  region  = "us-east-1" # your aws_region
+  access_key = var.access_key # keys    from
+  secret_key = var.secret_key # env-config.tf
 }
 
 resource "aws_dynamodb_table" "tokens_rate_limit" {
-  name = "TokensRateLimit"
+  name = "TokensRateLimit" # table name
 
   attribute {
     name = "token"
