@@ -5,9 +5,9 @@ export const createToken = async (email:string):Promise<string> => await signJwt
 
 const signJwt = async (email:string | object):Promise<string> => jwt.sign({email},process.env.JWT_SECRET!,{expiresIn:'24h'});
 
-export const verifyJwt = async (token:string) => {
+export const verifyJwt = async (token:string,secret:string = process.env.JWT_SECRET!) => {
     try {
-        const decodedToken:any = jwt.verify(token!,process.env.JWT_SECRET!);
+        const decodedToken:any = jwt.verify(token!,secret);
         return decodedToken; 
     } catch (e:any) {
         if (e instanceof TokenExpiredError) {

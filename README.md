@@ -42,3 +42,10 @@ Les variables d'environnement suivantes sont utilisées pour configurer l'applic
 - **JUSTIFY_WORD_LIMIT** : nombre maximal de mots pouvant être justifiés pendant une période de TOKENS_RATE_LIMIT_TIMEOUT (par défaut : 80000 mots).
 - **JWT_SECRET** : clé secrète utilisée pour signer les tokens JWT (remplacez "your_jwt_secret" par votre propre clé secrète).
 - **DYNAMODB_TABLE_NAME** : nom de la table DynamoDB utilisée pour stocker les informations de quota (par défaut : "TokensRateLimit")
+
+## Tests
+
+Tests unitaires & d'intégration réalisés avec jest/ts-jest
+Coverage 100%
+
+![alt text](https://github.com/bgdtc/justifyMe/blob/coverage/coverage.png)
