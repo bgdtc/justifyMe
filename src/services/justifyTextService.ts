@@ -11,14 +11,14 @@ export function justifyText(texte: string, lineLength: number = 80): string {
         const actualLine = justifiedLinesArray[lastIndex];
         const actualLineLength = actualLine.length;
 
-        // if actual line length + word length + 1 dépasse pas la limite alors ça rajoute le mot à la fin
+        // if actual line length + word length + 1 don't reach the limit, add the word to the end of the line
         if (actualLineLength + word.length + 1 <= lineLength) {
             justifiedLinesArray[lastIndex] = actualLine + (actualLine ? ' ' : '') + word;
         } else {
-        // sinon ça push une nouvelle ligne avec le mot
+        // else push new line with the actual word
             justifiedLinesArray.push(word);
         }
-        // on retourne le tableau de lignes justifiées
+        // return array of 80 chars lines
         return justifiedLinesArray;
     },['']);
 
@@ -35,10 +35,10 @@ export function justifyText(texte: string, lineLength: number = 80): string {
         const spacesCount = spaces.length;
         const spacesRemaining = lineLength - line.length;
 
-        // si pas d'espace alors on retourne la line
+        // no spaces, return the line
         if (spacesCount === 0) return line;
 
-        // on vient ensuite checker le nombre d'espaces à ajouter 
+        // check how many spaces need to be added to reach the char limit 
         let additionalSpaces = Array(spacesCount).fill(Math.floor(spacesRemaining / spacesCount));
         const spacesLeft = spacesRemaining % spacesCount;
 

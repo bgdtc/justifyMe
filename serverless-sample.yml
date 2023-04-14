@@ -5,7 +5,7 @@ provider:
   name: aws
   runtime: nodejs18.x
   iam:
-    role: arn:aws:iam::<your-aws-account-id>:role/event_target_role # role created by terraform, see terraform/db.tf
+    role: arn:aws:iam::<your-aws-account-id>:role/lambda_role # role created by terraform, see terraform/db.tf
 
 functions:
   handler:

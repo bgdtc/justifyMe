@@ -13,6 +13,11 @@ resource "aws_dynamodb_table" "tokens_rate_limit" {
   }
 
   attribute {
+    name = "email"
+    type = "S"
+  }
+
+  attribute {
     name = "expires_at"
     type = "N"
   }
@@ -20,6 +25,12 @@ resource "aws_dynamodb_table" "tokens_rate_limit" {
   hash_key = "token"
 
   billing_mode = "PAY_PER_REQUEST"
+
+  global_secondary_index {
+    name                 = "email"
+    hash_key             = "email"
+    projection_type      = "ALL"
+  }
 
   global_secondary_index {
     name                 = "expiresAtIndex"
@@ -72,7 +83,10 @@ resource "aws_iam_policy" "dynamodb_policy" {
           "dynamodb:Scan",
         ]
         Effect   = "Allow"
-        Resource = aws_dynamodb_table.tokens_rate_limit.arn
+        Resource = [
+          aws_dynamodb_table.tokens_rate_limit.arn,
+          "${aws_dynamodb_table.tokens_rate_limit.arn}/index/*"
+        ]
       }
     ]
   })

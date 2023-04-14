@@ -3,7 +3,7 @@ import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 
 export const createToken = async (email:string):Promise<string> => await signJwt(email);
 
-const signJwt = async (data:string | object):Promise<string> => jwt.sign({data},process.env.JWT_SECRET!,{expiresIn:'24h'});
+const signJwt = async (email:string | object):Promise<string> => jwt.sign({email},process.env.JWT_SECRET!,{expiresIn:'24h'});
 
 export const verifyJwt = async (token:string) => {
     try {

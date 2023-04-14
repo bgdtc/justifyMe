@@ -1,5 +1,6 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, UpdateCommand,PutCommand } from '@aws-sdk/lib-dynamodb' 
+import { DynamoDBDocumentClient, GetCommand, UpdateCommand,PutCommand,QueryCommand } from '@aws-sdk/lib-dynamodb' 
+import { verifyJwt } from './cryptoService';
 
 const dynamoDbClient = new DynamoDBClient({});
 const dynamoDb = DynamoDBDocumentClient.from(dynamoDbClient);
@@ -42,6 +43,20 @@ export const checkTokenRateLimit = async (token:string, wordCount:number): Promi
 
 export const insertTokenIntoDb = async (token:string): Promise<boolean> => {
     try {
+        const decodedToken:any = await verifyJwt(token);
+        const lookForEmailParams = {
+            TableName:tableName,
+            IndexName: 'email',
+            KeyConditionExpression:'email = :email',
+            ExpressionAttributeValues: {
+                ":email": decodedToken?.email 
+            }
+        };
+
+        const emailInTheDb = await dynamoDb.send(new QueryCommand(lookForEmailParams));
+
+        if (emailInTheDb?.Count !== 0) throw new Error('A token already exists for this email');
+
         const newItem = {
             TableName: tableName,
             Item: {
@@ -49,6 +64,7 @@ export const insertTokenIntoDb = async (token:string): Promise<boolean> => {
                 wordCount: 0,
                 created_at: Math.floor(Date.now() / 1000),
                 expires_at: Math.floor(hPlus24 / 1000),
+                email: decodedToken?.email
             }
         };
         await dynamoDb.send(new PutCommand(newItem));
