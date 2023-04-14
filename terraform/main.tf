@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = "bgdtc"
+    organization = "bgdtc" # your terraform cloud organization
 
     workspaces {
-      name = "justify-me"
+      name = "justify-me" # your terraform workspace
     }
   }
 }

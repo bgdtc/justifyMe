@@ -47,8 +47,9 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Terraform build
+# Terraform
 terraform/.terraform/**
+.terraform.lock.hcl
 
 # TypeScript v1 declaration files
 typings/
@@ -101,6 +102,7 @@ dist
 .vuepress/dist
 
 # Serverless directories
+serverless.yml
 .serverless/
 
 # FuseBox cache

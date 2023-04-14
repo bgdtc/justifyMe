@@ -60,11 +60,3 @@ export function justifyText(texte: string, lineLength: number = 80): string {
     //  return the array of justified lines with end of line after each line
     return justifiedLines.join(EOL);
 }
-
-export const alignLeftText = () => {
-
-};
-
-export const alignRightText = () => {
-
-};
