@@ -1,6 +1,6 @@
 # Justify Me API
 
-Ce projet est une API REST (typescript nodeJS) serverless fonctionnant avec AWS lambda et dynamoDB permettant de justifier du texte.
+Ce projet est une API REST (typescript node.JS) serverless fonctionnant avec AWS lambda et dynamoDB permettant de justifier du texte.
 L'api est disponible à cette addresse : https://justifyme.dev.sartheemploi.fr/api
 La documentation de cette API est disponible à cette addresse : https://bgdtc.github.io/justify-me-api-docs/
 
@@ -48,4 +48,4 @@ Les variables d'environnement suivantes sont utilisées pour configurer l'applic
 Tests unitaires & d'intégration réalisés avec jest/ts-jest
 Coverage 100%
 
-![alt text](https://github.com/bgdtc/justifyMe/blob/coverage/coverage.png)
+![<img src="coverage.png">](https://github.com/bgdtc/justifyMe/blob/main/coverage.png)
