@@ -5,6 +5,7 @@ L'api est disponible à cette addresse : https://justifyme.dev.sartheemploi.fr/a
 La documentation de cette API est disponible à cette addresse : https://bgdtc.github.io/justify-me-api-docs/
 
 ## Prérequis
+
 0. nodejs,npm,yarn,make...
 1. un compte AWS.
 2. un compte terraform cloud avec un workspace.
@@ -14,7 +15,7 @@ La documentation de cette API est disponible à cette addresse : https://bgdtc.g
 
 1. `git clone https://github.com/bgdtc/justifyMe.git`
 2. `cd justify me && make`
-3. Renommez "serverless-sample.yml" en "serverless.yml" et configurez le fichier avec vos informations.
+3. Configurez le fichier "serverless.yml" avec vos informations.
 4. Dans le dossier terraform/, modifiez les fichiers "db.tf", "env-config.tf" et "main.tf" avec vos informations.
 5. `make tf-init && make tf-plan && make tf-apply` (création de la table dans dynamo avec les autorisations nécessaires, etc.)
 6. `make start` (démarre le projet localement avec serverless offline)
@@ -37,11 +38,23 @@ Un fichier **insomnia.yml** est disponible dans le repo, il contient un workspac
 
 Les variables d'environnement suivantes sont utilisées pour configurer l'application :
 
+[serverless.yml]
+
 - **TOKENS_RATE_LIMIT_TIMEOUT** : durée en ms pendant laquelle le quota de mots est appliqué (par défaut : 86400000 ms, soit 24 heures).
+
 - **TOKENS_MAX_REQUEST** : nombre maximal de requêtes autorisées pour une période de TOKENS_RATE_LIMIT_TIMEOUT (par défaut : 1).
+
 - **JUSTIFY_WORD_LIMIT** : nombre maximal de mots pouvant être justifiés pendant une période de TOKENS_RATE_LIMIT_TIMEOUT (par défaut : 80000 mots).
+
 - **JWT_SECRET** : clé secrète utilisée pour signer les tokens JWT (remplacez "your_jwt_secret" par votre propre clé secrète).
+
 - **DYNAMODB_TABLE_NAME** : nom de la table DynamoDB utilisée pour stocker les informations de quota (par défaut : "TokensRateLimit")
+
+[terraform/env-config.tf]
+
+- **access_key** : votre AWS_ACCESS_KEY_ID
+
+- **secret_key** : votre AWS_SECRET_ACCESS_KEY
 
 ## Tests
 
@@ -49,3 +62,7 @@ Tests unitaires & d'intégration réalisés avec jest/ts-jest
 Coverage 100%
 
 ![<img src="coverage.png">](https://github.com/bgdtc/justifyMe/blob/main/coverage.png)
+
+## Perspectives d'évolution
+
+L'api est pensée pour être maintenable et évolutive, nous pouvons imaginer l'ajout de fonctionnalitées telles que l'alignement d'un texte, la séparation par paragraphes etc.

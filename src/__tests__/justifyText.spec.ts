@@ -11,9 +11,9 @@ const inputNoSpace = 'LoremipsumdolorsitametconsecteturadipiscingelitSedvellorem
 const expectedOutputNoSpace = 'LoremipsumdolorsitametconsecteturadipiscingelitSedvelloremidorciconguegravidaegetutnunc';
 
 describe('sanity check', () => {
-    it('should return true', () => {
-        expect(true).toBeTruthy();
-    });
+  it('should return true', () => {
+    expect(true).toBeTruthy();
+  });
 });
 
 describe('justifyText function', () => {
@@ -46,6 +46,5 @@ describe('justifyText function', () => {
   it('should handle input with no spaces', () => {
     expect(justifyText(inputNoSpace).trim()).toEqual(expectedOutputNoSpace.trim());
   });
-
 });
   
