@@ -48,4 +48,4 @@ Les variables d'environnement suivantes sont utilisées pour configurer l'applic
 Tests unitaires & d'intégration réalisés avec jest/ts-jest
 Coverage 100%
 
-![alt text](https://github.com/bgdtc/justifyMe/blob/coverage/coverage.png)
+![<img src="coverage.png">](https://github.com/bgdtc/justifyMe/blob/main/coverage.png)
