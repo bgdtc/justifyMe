@@ -22,8 +22,7 @@ resource "aws_dynamodb_table" "tokens_rate_limit" {
     type = "N"
   }
 
-  hash_key = "token"
-
+  hash_key     = "token"
   billing_mode = "PAY_PER_REQUEST"
 
   global_secondary_index {
@@ -53,11 +52,11 @@ resource "aws_iam_role" "event_target_role" {
   name = "event_target_role"
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version   = "2012-10-17"
     Statement = [
       {
-        Action = "sts:AssumeRole"
-        Effect = "Allow"
+        Action    = "sts:AssumeRole"
+        Effect    = "Allow"
         Principal = {
           Service = "events.amazonaws.com"
         }
@@ -70,11 +69,11 @@ resource "aws_iam_policy" "dynamodb_policy" {
   name        = "DynamoDBAccessPolicy"
   description = "Policy for allowing access to DynamoDB table"
 
-  policy = jsonencode({
-    Version = "2012-10-17"
+  policy      = jsonencode({
+    Version   = "2012-10-17"
     Statement = [
       {
-        Action = [
+        Action   = [
           "dynamodb:GetItem",
           "dynamodb:PutItem",
           "dynamodb:UpdateItem",
