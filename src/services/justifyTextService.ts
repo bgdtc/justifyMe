@@ -1,8 +1,8 @@
 import { EOL } from 'os';
 
-export function justifyText(texte: string, lineLength: number = 80): string {
+export function justifyText(text: string, lineLength: number = 80): string {
 
-    const words = texte.split(' ');
+    const words = text.split(' ');
 
     // transform into an array of lines of 80 chars
     const lines = words.reduce((justifiedLinesArray, word) => {

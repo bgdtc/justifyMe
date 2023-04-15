@@ -1,14 +1,10 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, UpdateCommand,PutCommand,QueryCommand } from '@aws-sdk/lib-dynamodb' 
 import { verifyJwt } from './cryptoService';
+import { tableName,rateLimit,hPlus24 } from '../utils';
 
 const dynamoDbClient = new DynamoDBClient({});
 const dynamoDb = DynamoDBDocumentClient.from(dynamoDbClient);
-const tableName = process.env.DYNAMODB_TABLE_NAME! || 'TokensRateLimit' ;
-
-const rateLimit = Number(process.env.JUSTIFY_WORD_LIMIT! || 80000);
-const now = new Date();
-const hPlus24 = now.setHours(now.getHours() + 24);
 
 export const checkTokenRateLimit = async (token:string, wordCount:number): Promise<boolean> => {
     const params = {
@@ -38,7 +34,7 @@ export const checkTokenRateLimit = async (token:string, wordCount:number): Promi
     } catch (e) {
         return false;
     }
-}
+};
 
 export const insertTokenIntoDb = async (token:string,secret?:string): Promise<boolean> => {
     try {
@@ -71,4 +67,4 @@ export const insertTokenIntoDb = async (token:string,secret?:string): Promise<bo
     } catch (e) {
         return false;
     }
-}
+};
