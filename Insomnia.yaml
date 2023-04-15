@@ -1,29 +1,29 @@
 _type: export
 __export_format: 4
-__export_date: 2023-04-14T15:14:02.289Z
+__export_date: 2023-04-15T16:40:49.370Z
 __export_source: insomnia.desktop.app:v2023.1.0
 resources:
   - _id: req_wrk_cb4a225a1f0a41c4bbd6b518acc29a20356a192b
     parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
-    modified: 1681484889518
+    modified: 1681576794136
     created: 1681376379645
     url: "{{ base_url }}/tokens"
     name: Crée un jeton d'accès à l'API.(LOCAL)
     description: ""
     method: POST
     body:
-      mimeType: application/json
-      text: |-
-        {
-          "email": "invalide@valide.com"
-        }
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - name: email
+          value: mail@test.test
+          id: pair_39dd26eaf0054bb397f49e621d8a542f
     parameters: []
     headers:
       - name: X-Forwarded-For
         disabled: true
         value: string
       - name: Content-Type
-        value: application/json
+        value: application/x-www-form-urlencoded
     authentication: {}
     metaSortKey: -1681376379645
     isPrivate: false
@@ -44,25 +44,27 @@ resources:
     _type: workspace
   - _id: req_fbba43dbcc7a410c8cbbab4e08608ac9
     parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
-    modified: 1681485004002
+    modified: 1681576809314
     created: 1681484914903
     url: "{{ _.prod_host }}/tokens"
     name: Crée un jeton d'accès à l'API.(PROD)
     description: ""
     method: POST
     body:
-      mimeType: application/json
-      text: |-
-        {
-          "email": "invalide@valide.com"
-        }
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - name: email
+          value: mail@jean.fr
+          id: pair_13ff28d1f70c495ebe4f06b0f9c94ee7
     parameters: []
     headers:
       - name: X-Forwarded-For
         disabled: true
         value: string
+        id: pair_c445f7a0af5e47928c51984940b20441
       - name: Content-Type
-        value: application/json
+        value: application/x-www-form-urlencoded
+        id: pair_3dfa094ea5d54b7ea9e82b4ff9575eaa
     authentication: {}
     metaSortKey: -1681376379643
     isPrivate: false
@@ -75,27 +77,38 @@ resources:
     _type: request
   - _id: req_wrk_cb4a225a1f0a41c4bbd6b518acc29a20da4b9237
     parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
-    modified: 1681484895349
+    modified: 1681576749784
     created: 1681376379641
-    url: '{{ base_url }}/justify?text="test"'
+    url: "{{ base_url }}/justify"
     name: Justifie un texte en alignant les mots sur une largeur donnée.(LOCAL)
     description: ""
     method: POST
     body:
-      mimeType: application/json
-      text: >-
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lorem id orci congue gravida eget ut nunc."
-        }
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - name: text
+          value: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget
+            rhoncus leo. Sed sodales nibh ex, vitae finibus massa iaculis
+            mattis. Maecenas accumsan nibh nec urna rutrum, in aliquam dolor
+            aliquet. Ut in risus convallis, bibendum lorem at, laoreet ipsum.
+            Quisque nec interdum ante. Pellentesque euismod ullamcorper neque,
+            auctor porttitor tellus posuere nec. Phasellus in odio nunc. Ut
+            nulla dolor, iaculis eu viverra ut, tincidunt eget massa.
+            Pellentesque finibus neque vel blandit consectetur. Donec enim
+            velit, tempor in lobortis id, volutpat id odio. Sed convallis et leo
+            non convallis. Praesent mattis tristique laoreet. Sed libero enim,
+            vehicula id imperdiet rhoncus, maximus a lectus. Fusce eu malesuada
+            odio.
+          id: pair_90f140f8059d48e3802983ec6c467a00
     parameters: []
     headers:
       - name: Authorization
         disabled: false
         value: Bearer
-          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidmFsaWRAZW1haWwuZnIiLCJpYXQiOjE2ODE0MjA3NDUsImV4cCI6MTY4MTUwNzE0NX0.isN0jpv0sj0v2TpaXG6t8Y1fT8wBDWYU5l53P-uzPnc
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmFsZGlkZUB2YWxpZGUuY29tIiwiaWF0IjoxNjgxNTU4NDM3LCJleHAiOjE2ODE2NDQ4Mzd9.CQUIDgR21lWtzhgWokmNZ7d4bvWp8wtpnxRZyYlrqPE
         id: pair_4057df638a94475595d4e87cbff69a1e
       - name: Content-Type
-        value: application/json
+        value: application/x-www-form-urlencoded
         id: pair_e7e5fef7a18f4a5f8185ceac00810018
     authentication: {}
     metaSortKey: -1681376379641
@@ -109,27 +122,38 @@ resources:
     _type: request
   - _id: req_e44e0a4cde694cd4bb2d090df07f5ccb
     parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
-    modified: 1681484907985
+    modified: 1681576753005
     created: 1681484907985
-    url: '{{ base_url }}/justify?text="test"'
+    url: "{{ _.prod_host }}/justify"
     name: Justifie un texte en alignant les mots sur une largeur donnée.(PROD)
     description: ""
     method: POST
     body:
-      mimeType: application/json
-      text: >-
-        {
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lorem id orci congue gravida eget ut nunc."
-        }
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - name: text
+          value: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget
+            rhoncus leo. Sed sodales nibh ex, vitae finibus massa iaculis
+            mattis. Maecenas accumsan nibh nec urna rutrum, in aliquam dolor
+            aliquet. Ut in risus convallis, bibendum lorem at, laoreet ipsum.
+            Quisque nec interdum ante. Pellentesque euismod ullamcorper neque,
+            auctor porttitor tellus posuere nec. Phasellus in odio nunc. Ut
+            nulla dolor, iaculis eu viverra ut, tincidunt eget massa.
+            Pellentesque finibus neque vel blandit consectetur. Donec enim
+            velit, tempor in lobortis id, volutpat id odio. Sed convallis et leo
+            non convallis. Praesent mattis tristique laoreet. Sed libero enim,
+            vehicula id imperdiet rhoncus, maximus a lectus. Fusce eu malesuada
+            odio.
+          id: pair_00ce1ba914f144318c09dda4361b027b
     parameters: []
     headers:
       - name: Authorization
         disabled: false
         value: Bearer
-          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoidmFsaWRAZW1haWwuZnIiLCJpYXQiOjE2ODE0MjA3NDUsImV4cCI6MTY4MTUwNzE0NX0.isN0jpv0sj0v2TpaXG6t8Y1fT8wBDWYU5l53P-uzPnc
+          eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmFsZGlkZUB2YWxpZGUuY29tIiwiaWF0IjoxNjgxNTU4NDM3LCJleHAiOjE2ODE2NDQ4Mzd9.CQUIDgR21lWtzhgWokmNZ7d4bvWp8wtpnxRZyYlrqPE
         id: pair_4057df638a94475595d4e87cbff69a1e
       - name: Content-Type
-        value: application/json
+        value: application/x-www-form-urlencoded
         id: pair_e7e5fef7a18f4a5f8185ceac00810018
     authentication: {}
     metaSortKey: -1680816921111.5
@@ -162,51 +186,38 @@ resources:
     _type: cookie_jar
   - _id: spc_c29687215dc34f2fb6972aceedbc63a7
     parentId: wrk_cb4a225a1f0a41c4bbd6b518acc29a20
-    modified: 1681376379655
+    modified: 1681486851171
     created: 1681375998398
     fileName: my-spec.yaml
     contents: >
       openapi: 3.0.0
 
       info:
-        title: API de justification de texte
-        contact: {
-          
-        }
+        title: Mon API
         version: 1.0.0
-        description: API permettant de justifier un texte en alignant les mots sur une largeur donnée.
       servers:
-        - url: http://localhost:3000/api
+        - url: https://localhost:3000/api
       paths:
         /tokens:
           post:
-            description: creé un token
-            summary: Crée un jeton d'accès à l'API.
-            operationId: '1'
-            tags:
-              - dogs
-            parameters:
-              - in: header
-                name: X-Forwarded-For
-                required: false
-                schema:
-                  type: string
-                description: L'adresse IP du client qui effectue la requête.
+            summary: Obtenir un token
+            description: Cette route envoie un token si l'email est valide. La requête est limitée à une fois toutes les 24 heures.
+            operationId: getToken
             requestBody:
               required: true
               content:
                 application/json:
                   schema:
                     type: object
+                    required:
+                      - email
                     properties:
                       email:
                         type: string
-                        description: L'adresse email de l'utilisateur.
-                    required:
-                      - email
+                        format: email
             responses:
               '200':
-                description: Token généré avec succès.
+                description: Token obtenu avec succès
                 content:
                   application/json:
                     schema:
@@ -215,21 +226,30 @@ resources:
                         token:
                           type: string
               '429':
-                description: Trop de requêtes ont été effectuées récemment.
-          x-rate-limits:
-            - rateLimit:
-                windowMs: 86400000 # 1 jour en millisecondes
-                max: 1
-                keyGenerator: 'function(req) { return req.headers["x-forwarded-for"] || req.connection.remoteAddress; }'
+                description: Trop de requêtes
+                headers:
+                  Retry-After:
+                    description: Indique combien de temps attendre avant de refaire une requête
+                    schema:
+                      type: integer
         /justify:
           post:
-            summary: Justifie un texte en alignant les mots sur une largeur donnée.
-            description: asclépios
-            operationId: '2'
-            tags:
-              - pets
+            summary: Justifier le texte
+            description: >
+              Cette route justifie le texte passé en paramètre avec une longueur de chaîne de 80 caractères.
+              Le nombre de mots pouvant être justifiés par jour est de 80 000.
+            operationId: justify
+            security:
+              - bearerAuth: []
+            parameters:
+              - in: query
+                name: text
+                schema:
+                  type: string
+                required: false
+                description: Le texte à justifier en tant que chaîne de caractères
             requestBody:
-              required: true
+              required: false
               content:
                 application/json:
                   schema:
@@ -237,19 +257,9 @@ resources:
                     properties:
                       text:
                         type: string
-                        description: Le texte à justifier.
-                    required:
-                      - text
-            parameters:
-              - in: header
-                name: Authorization
-                required: true
-                schema:
-                  type: string
-                description: Le jeton d'accès à l'API.
             responses:
               '200':
-                description: Texte justifié avec succès.
+                description: Texte justifié avec succès
                 content:
                   application/json:
                     schema:
@@ -257,15 +267,18 @@ resources:
                       properties:
                         justifiedText:
                           type: string
+              '401':
+                description: Non autorisé
+              '402':
+                description: Limite de mots quotidienne dépassée (Payment Required)
               '400':
-                description: La requête est mal formée.
-              '429':
-                description: Trop de requêtes ont été effectuées récemment.
-          x-rate-limits:
-            - rateLimit:
-                windowMs: 86400000 # 1 jour en millisecondes
-                max: 80000
-                keyGenerator: 'function(req) { return req.headers["authorization"]; }'
+                description: Le texte est vide ou manquant
+      components:
+        securitySchemes:
+          bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
     contentType: yaml
     _type: api_spec
   - _id: env_env_5a8b99d8059329c8c814d58f16967f8a3908bd5f_sub__64324caa
