@@ -1,6 +1,6 @@
 # Justify Me API
 
-Ce projet est une API REST serverless fonctionnant avec AWS lambda et dynamoDB permettant de justifier du texte.
+Ce projet est une API REST (typescript nodeJS) serverless fonctionnant avec AWS lambda et dynamoDB permettant de justifier du texte.
 L'api est disponible à cette addresse : https://justifyme.dev.sartheemploi.fr/api
 La documentation de cette API est disponible à cette addresse : https://bgdtc.github.io/justify-me-api-docs/
 
@@ -42,3 +42,10 @@ Les variables d'environnement suivantes sont utilisées pour configurer l'applic
 - **JUSTIFY_WORD_LIMIT** : nombre maximal de mots pouvant être justifiés pendant une période de TOKENS_RATE_LIMIT_TIMEOUT (par défaut : 80000 mots).
 - **JWT_SECRET** : clé secrète utilisée pour signer les tokens JWT (remplacez "your_jwt_secret" par votre propre clé secrète).
 - **DYNAMODB_TABLE_NAME** : nom de la table DynamoDB utilisée pour stocker les informations de quota (par défaut : "TokensRateLimit")
+
+## Tests
+
+Tests unitaires & d'intégration réalisés avec jest/ts-jest
+Coverage 100%
+
+![alt text](https://github.com/bgdtc/justifyMe/blob/coverage/coverage.png)
